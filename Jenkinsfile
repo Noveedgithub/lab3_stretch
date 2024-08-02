@@ -15,7 +15,7 @@ pipeline{
         stage("Security Scan"){
             steps{
                 script{
-                    sh 'trivy image -f json report.json lab3_stretch'
+                    sh 'trivy fs --format json -o report.json .'
                 }
                 post {
                     always {
