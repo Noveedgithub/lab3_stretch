@@ -5,7 +5,7 @@ pipeline{
             steps{
                 sh 'docker rm -f \$(docker ps -aq) || true'
                 sh 'docker rmi -f \$(docker images) || true'
-                sh 'docker network create new-network || true
+                sh 'docker network create new-network || true'
             }
         }
         stage("Build image"){
@@ -16,7 +16,7 @@ pipeline{
         }
         stage("Security Scan") {
             steps {
-                sh "trivy fs --format json -o trivy-report.json ."
+                sh 'trivy fs --format json -o trivy-report.json .'
             }
             post {
                 always {
