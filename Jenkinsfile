@@ -17,5 +17,12 @@ pipeline{
                 sh "docker run -d -p 80:5500 lab3_stretch"
             }
         }
+        stage("Security Scan"){
+            steps{
+                script{
+                    sh 'trivy image -f json -o results.json lab3_stretch'
+                }
+            }
+        }
     }
 }
