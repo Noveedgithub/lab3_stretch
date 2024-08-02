@@ -12,14 +12,14 @@ pipeline{
                 sh "docker build -t lab3_stretch ."
             }
         }
-        stage("Security Scan"){
-            steps{
-                sh 'trivy fs --format json -o report.json .'
-                }
-                post {
-                    always {
-                        // Archive trivy report
-                        achiveArtifacts artifacts: 'report.json', onlyIfSuccessful: true
+        stage("Security Scan") {
+            steps {
+                sh "trivy fs --format json -o trivy-report.json ."
+            }
+            post {
+                always {
+                    // Archive the Trivy report
+                    archiveArtifacts artifacts: 'trivy-report.json', onlyIfSuccessful: true
                 }
             }
         }
